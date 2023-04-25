@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1033362503}
   - component: {fileID: 1033362504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1326,7 +1326,7 @@ GameObject:
   - component: {fileID: 1544308444}
   - component: {fileID: 1544308445}
   - component: {fileID: 1544308446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1659,6 +1659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e217ba7ea1d49d8458593a6b05236843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  innerRadius: 0.2
+  outerRadius: 0.4
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  moveSpeed: 0.5
+  attackSpeed: 0.8
 --- !u!1 &1871304772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1871304773}
   - component: {fileID: 1871304774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fist
   m_TagString: fist
   m_Icon: {fileID: 0}
@@ -1704,7 +1711,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02402974, y: -0.0039649904}
+  m_Offset: {x: 0.05006796, y: -0.0039649904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1715,7 +1722,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12645249, y: 0.28212935}
+  m_Size: {x: 0.17852896, y: 0.28212935}
   m_EdgeRadius: 0
 --- !u!1 &2038386322
 GameObject:

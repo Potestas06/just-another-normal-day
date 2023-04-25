@@ -77,7 +77,7 @@ public class player_script : MonoBehaviour
         else
         {
             Vector3 newPosition = fist.localPosition;
-            newPosition.x = -0.1f;
+            newPosition.x = -0.19f;
             fist.localPosition = newPosition;
         }
 
@@ -116,12 +116,17 @@ public class player_script : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "spider")
-        {
-            health--;
-            Debug.Log("Player health: " + health);
-        }
+
+        
+            if (collision.gameObject.CompareTag("spider") && !childObject.activeSelf)
+            {
+                health--;
+                Debug.Log("Player health: " + health);
+            }
+        
     }
+
+
 
 
 

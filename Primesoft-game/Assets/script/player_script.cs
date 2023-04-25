@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class player_script : MonoBehaviour
 {
+    public int health = 3;
     private Rigidbody2D body;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -17,7 +19,7 @@ public class player_script : MonoBehaviour
     private float vertical;
     private bool isMoving;
     private bool isfliped;
-
+    private bool isdead;
     private void Start()
     {
         childObject = transform.GetChild(0).gameObject;
@@ -31,33 +33,37 @@ public class player_script : MonoBehaviour
     {
         Move();
         Attack();
+        checkHealth();
     }
 
     private void Move()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        isMoving = horizontal != 0 || vertical != 0;
-        animator.SetBool("run", isMoving);
-        if (horizontal < 0)
+        if (!isdead)
         {
-            isfliped = false;
-            sprite.flipX = true;
-        }
-        else if (horizontal > 0)
-        {
-            isfliped = true;
-            sprite.flipX = false;
-        }
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            isMoving = horizontal != 0 || vertical != 0;
+            animator.SetBool("run", isMoving);
+            if (horizontal < 0)
+            {
+                isfliped = false;
+                sprite.flipX = true;
+            }
+            else if (horizontal > 0)
+            {
+                isfliped = true;
+                sprite.flipX = false;
+            }
 
 
-        if (horizontal != 0 && vertical != 0)
-        {
-            horizontal *= moveLimiter;
-            vertical *= moveLimiter;
-        }
+            if (horizontal != 0 && vertical != 0)
+            {
+                horizontal *= moveLimiter;
+                vertical *= moveLimiter;
+            }
 
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+            body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        }
     }
 
     private IEnumerator AttackCoroutine()
@@ -75,9 +81,8 @@ public class player_script : MonoBehaviour
             fist.localPosition = newPosition;
         }
 
-        childObject.SetActive(true);
         animator.SetTrigger("attack");
-
+        childObject.SetActive(true);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
         childObject.SetActive(false);
@@ -89,6 +94,32 @@ public class player_script : MonoBehaviour
         {
             Debug.Log("Attack");
             StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    private void checkHealth()
+    {
+        if (health == 0)
+        {
+            isdead = true;
+            body.velocity = Vector2.zero;
+            StartCoroutine(dieCoroutine());
+        }
+    }
+    private IEnumerator dieCoroutine()
+    {
+        animator.SetBool("run", false);
+        animator.SetBool("dead", true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        SceneManager.LoadScene(1);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "spider")
+        {
+            health--;
+            Debug.Log("Player health: " + health);
         }
     }
 

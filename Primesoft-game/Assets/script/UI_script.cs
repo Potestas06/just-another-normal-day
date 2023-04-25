@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UI_script : MonoBehaviour
 {
     public player_script player_script;
     private int player_health;
+    private int player_coins;
+    public TextMeshProUGUI textMeshProUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,17 +35,32 @@ public class UI_script : MonoBehaviour
             }
 
         }
+
+        if(player_script.coins != player_coins)
+        {
+            player_coins = player_script.coins;
+            addcoin();
+            Debug.Log("added coins: " + player_coins);
+        }
     }
 
+    private void addcoin()
+    {
+        GameObject childObject = gameObject.transform.Find("coins").gameObject;
+        childObject.GetComponent<TextMeshProUGUI>().text = "Coins: " + player_coins.ToString();
+    }
     private void removeHart()
     {
-        GameObject childObject = transform.GetChild(player_health).gameObject;
+        player_health++;
+        GameObject childObject = gameObject.transform.Find("Health" + player_health).gameObject;
+
         childObject.SetActive(false);
     }
 
     private void addHart()
     {
-        GameObject childObject = transform.GetChild(player_health).gameObject;
+        player_health--;
+        GameObject childObject = gameObject.transform.Find("Health" + player_health).gameObject;
         childObject.SetActive(true);
     }
 }

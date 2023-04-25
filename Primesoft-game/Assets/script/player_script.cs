@@ -5,21 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class player_script : MonoBehaviour
 {
+    public float runSpeed = 0.8f;
+    public bool isAttacking;
     public int health = 3;
+    public int coins;
+
     private Rigidbody2D body;
     private Animator animator;
     private SpriteRenderer sprite;
     private Transform fist;
     private GameObject childObject;
+    private SpriteRenderer playerSpriteRenderer;
 
-    public float runSpeed = 0.8f;
     private float moveLimiter = 0.7f;
-
     private float horizontal;
     private float vertical;
     private bool isMoving;
     private bool isfliped;
     private bool isdead;
+
+
+
     private void Start()
     {
         childObject = transform.GetChild(0).gameObject;
@@ -83,8 +89,9 @@ public class player_script : MonoBehaviour
 
         animator.SetTrigger("attack");
         childObject.SetActive(true);
+        isAttacking = true;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
+        isAttacking = false;
         childObject.SetActive(false);
     }
 
@@ -92,7 +99,6 @@ public class player_script : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Attack");
             StartCoroutine(AttackCoroutine());
         }
     }
@@ -114,23 +120,29 @@ public class player_script : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
 
-        
-            if (collision.gameObject.CompareTag("spider") && !childObject.activeSelf)
-            {
-                health--;
-                Debug.Log("Player health: " + health);
-            }
-        
+    void ResetColor()
+    {
+        playerSpriteRenderer.color = Color.white;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("spider") && !isAttacking)
+        {
+            health--;
+            Color damageColor = new Color(0.75f, 0.20f, 0.22f);
+            playerSpriteRenderer.color = damageColor;
+            Invoke("ResetColor", 0.5f);
+        }
+    }
 
-
-
-
-
-
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("coin"))
+        {
+            coins++;
+            Destroy(collision.gameObject);
+        }
+    }
 }

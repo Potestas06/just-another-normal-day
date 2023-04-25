@@ -4,65 +4,39 @@ using UnityEngine;
 
 public class spider_script : MonoBehaviour
 {
-    [SerializeField] private float innerRadius = 0.1f;
-    [SerializeField] private float outerRadius = 0.2f;
-    [SerializeField] private LayerMask playerLayer;
-    public float moveSpeed = 0.5f;
-    public float attackSpeed = 0.8f;
-    private Animator animator;
 
-    private Ray innerRay;
-    private Ray outerRay;
+    public float moveSpeed = 0.5f;
+    private Animator animator;
+    private Transform target;
+    public player_script player_script;
+    private Rigidbody2D body;
+    private bool isdead;
 
 
     void Start()
     {
+        body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        innerRay = new Ray(transform.position, transform.forward);
-        outerRay = new Ray(transform.position, transform.forward);
+        player_script = GameObject.Find("player").GetComponent<player_script>();
     }
 
 
     void Update()
     {
-        innerRay.origin = transform.position;
-        outerRay.origin = transform.position;
-        innerRay.direction = transform.forward;
-        outerRay.direction = transform.forward;
-    }
-
-    void FixedUpdate()
-    {
-        RaycastHit innerHit;
-        RaycastHit outerHit;
-        bool innerRaycast = Physics.Raycast(innerRay, out innerHit, innerRadius, playerLayer);
-        bool outerRaycast = Physics.Raycast(outerRay, out outerHit, outerRadius, playerLayer);
-        if (innerRaycast)
+        if(target != null)
         {
-            Debug.Log("inner");
-            Vector3 direction = (innerHit.point - transform.position).normalized;
-            transform.position += direction * attackSpeed * Time.deltaTime;
-        }
-        else if (outerRaycast)
-        {
-            Debug.Log("outer");
-            Vector3 direction = (outerHit.point - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
         }
     }
 
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, innerRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, outerRadius);
-    }
 
 
     private void die()
     {
+        isdead = true;
+        body.velocity = Vector2.zero;
+        animator.SetBool("run", false);
         StartCoroutine(dieAnimation());
     }
 
@@ -80,11 +54,33 @@ public class spider_script : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("fist"))
+        if(collision.gameObject.tag == "Player" && !isdead)
         {
+            target = collision.gameObject.transform;
+            animator.SetBool("run", true);
+        }   
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            target = null;
+            animator.SetBool("run", false);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Spider collision");
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Player" && player_script.isAttacking)
+        {
+            player_script.coins++;
             die();
+            
         }
     }
 }

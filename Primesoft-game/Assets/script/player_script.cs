@@ -87,6 +87,7 @@ public class player_script : MonoBehaviour
             fist.localPosition = newPosition;
         }
 
+        animator.SetBool("run", false);
         animator.SetTrigger("attack");
         childObject.SetActive(true);
         isAttacking = true;
@@ -126,9 +127,9 @@ public class player_script : MonoBehaviour
         playerSpriteRenderer.color = Color.white;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void takeDamage()
     {
-        if (collision.gameObject.CompareTag("spider") && !isAttacking)
+        if (!isAttacking)
         {
             health--;
             Color damageColor = new Color(0.75f, 0.20f, 0.22f);

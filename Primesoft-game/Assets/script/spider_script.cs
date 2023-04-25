@@ -29,9 +29,6 @@ public class spider_script : MonoBehaviour
         }
     }
 
-
-
-
     private void die()
     {
         isdead = true;
@@ -81,6 +78,9 @@ public class spider_script : MonoBehaviour
             player_script.coins++;
             die();
             
+        }else if(collision.gameObject.tag == "Player")
+        {
+            player_script.takeDamage();
         }
     }
 }

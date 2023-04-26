@@ -1,16 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class trap_controller_script : MonoBehaviour
 {
     private Animator animator;
-    private bool isActive;
+    private bool isActive = true;
     void Start()
     {
-        isActive = true;
         animator = GetComponent<Animator>();
         foreach (Transform child in transform)
         {
@@ -22,20 +18,19 @@ public class trap_controller_script : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             isActive = !isActive;
-            UpdateTraps();
-            return;
+            yield return StartCoroutine(UpdateTrapsCoroutine());
         }
     }
 
-    private void UpdateTraps()
+    private IEnumerator UpdateTrapsCoroutine()
     {
-        Debug.Log("UpdateTraps: " + isActive);
-        animator.SetTrigger(isActive ? "on" : "off");
+        animator.SetBool("lever", isActive);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         foreach (Transform child in transform)
         {
             if (child.TryGetComponent(out trap_script trap))
@@ -44,8 +39,9 @@ public class trap_controller_script : MonoBehaviour
             }
         }
     }
-
-
-
-
 }
+
+
+
+
+

@@ -5,6 +5,7 @@ public class trap_controller_script : MonoBehaviour
 {
     private Animator animator;
     private bool isActive = true;
+    public bool unlocked = true;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,7 +21,7 @@ public class trap_controller_script : MonoBehaviour
 
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && unlocked)
         {
             isActive = !isActive;
             yield return StartCoroutine(UpdateTrapsCoroutine());

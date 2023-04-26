@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class spider_script : MonoBehaviour
 {
-
+    private soundManager soundManager;
     public float moveSpeed = 0.5f;
+    public GameObject blood_efekt;
+    public GameObject coin;
     private Animator animator;
     private Transform target;
-    public player_script player_script;
+    private player_script player_script;
     private Rigidbody2D body;
     private bool isdead;
 
 
     void Start()
     {
+        soundManager = GameObject.Find("soundManager").GetComponent<soundManager>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         player_script = GameObject.Find("player").GetComponent<player_script>();
@@ -23,7 +26,7 @@ public class spider_script : MonoBehaviour
 
     void Update()
     {
-        if(target != null)
+        if(target != null && !isdead)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
         }
@@ -47,6 +50,9 @@ public class spider_script : MonoBehaviour
     private IEnumerator Waitdestroy()
     {
         yield return new WaitForSeconds(5f);
+        Instantiate(blood_efekt, transform.position, Quaternion.identity);
+        Instantiate(coin, transform.position, Quaternion.identity);
+        soundManager.Play("explosion");
         Destroy(gameObject);
     }
 
@@ -75,10 +81,10 @@ public class spider_script : MonoBehaviour
         Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Player" && player_script.isAttacking)
         {
-            player_script.coins++;
+            soundManager.Play("dieSpider");
             die();
-            
-        }else if(collision.gameObject.tag == "Player")
+        }
+        else if(collision.gameObject.tag == "Player" && !isdead)
         {
             player_script.takeDamage();
         }

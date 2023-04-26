@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  player_script: {fileID: 0}
+  blood_efekt: {fileID: 743979045945272826, guid: c13b5c8b09f9431408c2b692a4ec9d2f, type: 3}
+  coin: {fileID: 834848544157909718, guid: ec88f29ebbd86414f88b56b81c300558, type: 3}
 --- !u!50 &7132636197179308122
 Rigidbody2D:
   serializedVersion: 4

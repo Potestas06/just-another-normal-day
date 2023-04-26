@@ -9,14 +9,12 @@ public class UI_script : MonoBehaviour
     private int player_health;
     private int player_coins;
     public TextMeshProUGUI textMeshProUI;
-    // Start is called before the first frame update
     void Start()
     {
         player_script = GameObject.Find("player").GetComponent<player_script>();
         player_health = player_script.health;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player_script.health != player_health)
@@ -24,13 +22,11 @@ public class UI_script : MonoBehaviour
             if (player_script.health < player_health)
             {
                 player_health = player_script.health;
-                Debug.Log("Remove " + player_health);
                 removeHart();
             }
             else
             {
                 player_health = player_script.health;
-                Debug.Log("add " + player_health);
                 addHart();
             }
 
@@ -40,7 +36,6 @@ public class UI_script : MonoBehaviour
         {
             player_coins = player_script.coins;
             addcoin();
-            Debug.Log("added coins: " + player_coins);
         }
     }
 

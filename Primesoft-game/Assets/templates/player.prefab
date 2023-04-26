@@ -147,6 +147,7 @@ MonoBehaviour:
   runSpeed: 0.8
   isAttacking: 0
   health: 3
+  coins: 0
 --- !u!70 &1418629944393793084
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -160,8 +161,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0042447727}
-  m_Size: {x: 0.13311645, y: 0.26019108}
+  m_Offset: {x: 0.0030500442, y: -0.028628055}
+  m_Size: {x: 0.110749304, y: 0.18427862}
   m_Direction: 0
 --- !u!1 &1418629945157443750
 GameObject:

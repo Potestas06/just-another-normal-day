@@ -9,13 +9,13 @@ public class player_script : MonoBehaviour
     public bool isAttacking;
     public int health = 3;
     public int coins;
+    private soundManager soundManager;
 
     private Rigidbody2D body;
     private Animator animator;
     private SpriteRenderer sprite;
     private Transform fist;
     private GameObject childObject;
-    private SpriteRenderer playerSpriteRenderer;
 
     private float moveLimiter = 0.7f;
     private float horizontal;
@@ -28,6 +28,7 @@ public class player_script : MonoBehaviour
 
     private void Start()
     {
+        soundManager = GameObject.Find("soundManager").GetComponent<soundManager>();
         childObject = transform.GetChild(0).gameObject;
         fist = transform.GetChild(0);
         sprite = GetComponent<SpriteRenderer>();
@@ -83,14 +84,15 @@ public class player_script : MonoBehaviour
         else
         {
             Vector3 newPosition = fist.localPosition;
-            newPosition.x = -0.19f;
+            newPosition.x = -0.08f;
             fist.localPosition = newPosition;
         }
-
+        
         animator.SetBool("run", false);
         animator.SetTrigger("attack");
         childObject.SetActive(true);
         isAttacking = true;
+        soundManager.Play("hit");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         isAttacking = false;
         childObject.SetActive(false);
@@ -117,6 +119,7 @@ public class player_script : MonoBehaviour
     {
         animator.SetBool("run", false);
         animator.SetBool("dead", true);
+        soundManager.Play("die");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene(1);
     }
@@ -124,7 +127,7 @@ public class player_script : MonoBehaviour
 
     void ResetColor()
     {
-        playerSpriteRenderer.color = Color.white;
+        sprite.color = Color.white;
     }
 
     public void takeDamage()
@@ -133,7 +136,8 @@ public class player_script : MonoBehaviour
         {
             health--;
             Color damageColor = new Color(0.75f, 0.20f, 0.22f);
-            playerSpriteRenderer.color = damageColor;
+            soundManager.Play("hurt");
+            sprite.color = damageColor;
             Invoke("ResetColor", 0.5f);
         }
     }
@@ -142,6 +146,7 @@ public class player_script : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("coin"))
         {
+            soundManager.Play("coin");
             coins++;
             Destroy(collision.gameObject);
         }

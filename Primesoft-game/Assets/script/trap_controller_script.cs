@@ -5,9 +5,11 @@ public class trap_controller_script : MonoBehaviour
 {
     private Animator animator;
     private bool isActive = true;
+    private soundManager soundManager;
     public bool unlocked = true;
     void Start()
     {
+        soundManager = GameObject.Find("soundManager").GetComponent<soundManager>();
         animator = GetComponent<Animator>();
         foreach (Transform child in transform)
         {
@@ -23,6 +25,7 @@ public class trap_controller_script : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && unlocked)
         {
+            soundManager.Play("lever");
             isActive = !isActive;
             yield return StartCoroutine(UpdateTrapsCoroutine());
         }

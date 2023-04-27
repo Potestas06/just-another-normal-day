@@ -43,11 +43,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9f94f3021cc900442b69e5438f0c696b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -186,4 +186,19 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f87e0c9482b5483498c72e3da403d69a, type: 3}
     volume: 1
     loop: 0
+    source: {fileID: 0}
+  - name: key
+    clip: {fileID: 8300000, guid: 7d40542c04a7b014a9d0e128e321e416, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: lever
+    clip: {fileID: 8300000, guid: 4c1759c45545a3c43a429f947a88b489, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: background
+    clip: {fileID: 8300000, guid: 4c1759c45545a3c43a429f947a88b489, type: 3}
+    volume: 1
+    loop: 1
     source: {fileID: 0}

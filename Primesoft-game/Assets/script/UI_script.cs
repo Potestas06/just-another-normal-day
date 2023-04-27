@@ -58,4 +58,13 @@ public class UI_script : MonoBehaviour
         GameObject childObject = gameObject.transform.Find("Health" + player_health).gameObject;
         childObject.SetActive(true);
     }
+
+    private void instantdeath()
+    {
+        for(int i = 1; i <= 3; i++)
+        {
+            GameObject childObject = gameObject.transform.Find("Health" + i).gameObject;
+            childObject.SetActive(false);
+        }
+    }
 }

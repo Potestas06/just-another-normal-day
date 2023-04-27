@@ -100,7 +100,7 @@ public class player_script : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton2))
         {
             StartCoroutine(AttackCoroutine());
         }

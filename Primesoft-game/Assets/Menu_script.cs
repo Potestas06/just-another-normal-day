@@ -6,6 +6,6 @@ public class Menu_script : MonoBehaviour
 {
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 }

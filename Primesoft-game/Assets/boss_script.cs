@@ -78,6 +78,7 @@ public class boss_script : MonoBehaviour
 
     private IEnumerator SummonAni()
     {
+        soundManager.Play("summon");
         animator.SetTrigger("summon");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Instantiate(summon, transform.position, Quaternion.identity);

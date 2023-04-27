@@ -48,7 +48,7 @@ public class UI_script : MonoBehaviour
     {
         player_health++;
         GameObject childObject = gameObject.transform.Find("Health" + player_health).gameObject;
-
+        player_health--;
         childObject.SetActive(false);
     }
 
@@ -56,6 +56,7 @@ public class UI_script : MonoBehaviour
     {
         player_health--;
         GameObject childObject = gameObject.transform.Find("Health" + player_health).gameObject;
+        player_health++;
         childObject.SetActive(true);
     }
 

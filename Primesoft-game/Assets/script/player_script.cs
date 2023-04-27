@@ -108,10 +108,12 @@ public class player_script : MonoBehaviour
 
     private void checkHealth()
     {
-        if (health == 0)
+        if (health <= 0)
         {
             isdead = true;
             body.velocity = Vector2.zero;
+            PlayerPrefs.SetInt("coins", coins);
+            PlayerPrefs.SetInt("lastLevel", SceneManager.GetActiveScene().buildIndex);
             StartCoroutine(dieCoroutine());
         }
     }

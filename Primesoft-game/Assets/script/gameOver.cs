@@ -9,4 +9,9 @@ public class gameOver : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetInt("lastLevel"));
+    }
 }

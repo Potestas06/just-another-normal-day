@@ -13,7 +13,7 @@ public class boss_script : MonoBehaviour
     private Rigidbody2D body;
     public GameObject summon;
     private bool isdead;
-    public int health = 3;
+    public int health = 6;
     private SpriteRenderer sprite;
 
 

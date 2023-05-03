@@ -1,6 +1,6 @@
 # primesoft-game
 
-A Simple Game made in a week.
+A Simple Game made in a week "caled just another normal day".
 
 # Instalation
 

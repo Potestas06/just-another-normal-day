@@ -34,6 +34,7 @@ public class player_script : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
+        coins = PlayerPrefs.GetInt("coins");
     }
 
     private void Update()

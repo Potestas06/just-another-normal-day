@@ -13,6 +13,7 @@ public class UI_script : MonoBehaviour
     {
         player_script = GameObject.Find("player").GetComponent<player_script>();
         player_health = player_script.health;
+        player_coins = player_script.coins;
     }
 
     void Update()

@@ -1,3 +1,9 @@
+![GitHub issues](https://img.shields.io/github/issues/potestas06/primesoft-game)
+![GitHub repo size](https://img.shields.io/github/repo-size/potestas06/primesoft-game)
+![GitHub all releases](https://img.shields.io/github/downloads/Potestas06/primesoft-game/total)
+![GitHub](https://img.shields.io/github/license/Potestas06/primesoft-game)
+![GitHub Repo stars](https://img.shields.io/github/stars/potestas06/primesoft-game?style=social)
+
 # primesoft-game
 
 A Simple Game made in a week called "just another normal day".

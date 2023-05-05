@@ -197,8 +197,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     source: {fileID: 0}
-  - name: background
-    clip: {fileID: 8300000, guid: 4c1759c45545a3c43a429f947a88b489, type: 3}
+  - name: stone_particle
+    clip: {fileID: 8300000, guid: 5062668cdd17a654385a5c385db92651, type: 3}
     volume: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}

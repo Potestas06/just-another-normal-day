@@ -120,7 +120,7 @@ public class player_script : MonoBehaviour
     private IEnumerator dieCoroutine()
     {
         animator.SetBool("run", false);
-        animator.SetBool("dead", true);
+        animator.SetTrigger("die");
         soundManager.Play("die");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene(1);

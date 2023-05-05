@@ -9,6 +9,6 @@
 | 1.x.x   | :white_check_mark: |
 
 
-## Reporting a Vulnerability
+## known Vulnerability
 
-not known yet
+- no Vulnerability known yet

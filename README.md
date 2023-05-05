@@ -4,9 +4,9 @@
 ![GitHub](https://img.shields.io/github/license/Potestas06/primesoft-game)
 ![GitHub Repo stars](https://img.shields.io/github/stars/potestas06/primesoft-game?style=social)
 
-# primesoft-game
+# just another normal day
 
-A Simple Game made in a week called "just another normal day".
+A Simple Game project called "just another normal day".
 
 ![ezgif-5-8d9ca83bbb](https://user-images.githubusercontent.com/94400853/236230548-dca34753-1199-4508-8982-155e174d9a17.gif)
 

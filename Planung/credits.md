@@ -7,3 +7,5 @@ Map:
 <https://luissn0w.itch.io/your-1st-dungeon?download>
 Death boss:
 <https://darkpixel-kronovi.itch.io/undead-executioner>
+Stone boss
+<https://darkpixel-kronovi.itch.io/mecha-golem-free>

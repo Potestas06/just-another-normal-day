@@ -9,6 +9,8 @@ A Simple Game made in a week called "just another normal day".
 - windows
 - Xbox (only when dev mode is active)
 
+*mac and switch in progress*
+
 # Instalation
 
 ## Windows:
